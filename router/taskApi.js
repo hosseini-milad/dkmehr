@@ -4,7 +4,7 @@ const jsonParser = bodyParser.json();
 const router = express.Router()
 const auth = require("../middleware/auth");
 const task = require('../models/main/task');
-const LogCreator = require('../middleware/LogCreator');
+const LogCreator = require('../middleware/logCreator');
 const users = require('../models/auth/users');
 
 router.get('/report', async (req,res)=>{
