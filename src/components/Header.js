@@ -2,14 +2,15 @@ import { useState } from 'react';
 import Cookies from 'universal-cookie';
 
 import errortrans from "../translate/error";
+import env from '../env';
 
 const Header = (props)=>{
     const cookies = new Cookies();
     const [convas,setConvas] = useState(0)
-    const token=cookies.get('fiin-login');
+    const token=cookies.get(env.cookieName);
     const lang = props.lang?props.lang.lang:errortrans.defaultLang;
     const logOff=()=>{
-       cookies.remove('fiin-login',{ path: '/' });
+       cookies.remove(env.cookieName,{ path: '/' });
        setTimeout(()=>(document.location.reload(),500))
     }
     return(
@@ -59,9 +60,9 @@ const Header = (props)=>{
                         </span>
                     </button>
                     <ul>
-                        <li><a href="/profile">Dados do utilizador</a></li>
-                        <li><a href="/password">Password</a></li>
-                        <li><a href="#" onClick={logOff}>Sair da Sessão</a></li>
+                        <li><a href="/profile">{errortrans.editProfile[lang]}</a></li>
+                        <li><a href="/password">{errortrans.password[lang]}</a></li>
+                        <li><a href="#" onClick={logOff}>{errortrans.logOut[lang]}</a></li>
                     </ul>
                 </div>
             </nav>

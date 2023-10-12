@@ -1,10 +1,13 @@
+import errortrans from "../translate/error"
+
 function FilterBitrix(props){
+    const lang = props.lang&&props.lang
     return(
         <div className="form-fiin form-search">
             <div className="row">
                 <div className="col-xl col-md-4 col-sm-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="first-name">Filtros</label>
+                        <label htmlFor="first-name">{errortrans.filter[lang]}</label>
                         <input type="text" name="firstname" id="first-name" 
                         placeholder="Filtros" value={props.filter&&props.filter.search}
                         onChange={(e)=>(props.setFilter(data => ({

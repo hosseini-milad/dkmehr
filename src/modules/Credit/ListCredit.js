@@ -13,7 +13,7 @@ const CreditList = (props)=>{
 
     useEffect(()=>{
         if(!doFilter)return
-        const token=cookies.get('fiin-login')
+        const token=cookies.get(env.cookieName)
         const postOptions={
             method:'post',
             headers: { 'Content-Type': 'application/json' ,

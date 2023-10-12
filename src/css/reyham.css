@@ -25,6 +25,10 @@ html{
     cursor: pointer;
     color:#fff;
 }
+.rtl{
+    direction: rtl;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .filterIcon{
     position: absolute;
     bottom: 15px;

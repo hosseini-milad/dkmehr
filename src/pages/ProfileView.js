@@ -2,13 +2,15 @@ import { useEffect, useState } from "react"
 import Breadcrumb from "../components/BreadCrumb"
 import Cookies from 'universal-cookie';
 import env from "../env";
+import errortrans from "../translate/error";
 const cookies = new Cookies();
 
-function ProfileView(){
+function ProfileView(props){
     const [users,setUsers] = useState()
     const [error,setError] = useState({message:'',color:"brown"})
     
-    const token=cookies.get('fiin-login')
+    const token=cookies.get(env.cookieName)
+    const lang = props.lang&&props.lang.lang
     const disableState = token.access==="manager"?false:true;
     useEffect(()=>{
         const postOptions={
@@ -29,7 +31,7 @@ function ProfileView(){
         })
     },[])
     const saveData=()=>{
-        const token=cookies.get('fiin-login')
+        const token=cookies.get(env.cookieName)
         const postOptions={
             method:'post',
             headers: { 'Content-Type': 'application/json' ,
@@ -58,14 +60,14 @@ function ProfileView(){
     }
     return(
         <div className="container">
-        <Breadcrumb title={"Dados do utilizador"}/>
+        <Breadcrumb title={errortrans.editProfile[lang]}/>
         
         <div className="section-fiin dados-do-consultor">
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="form-fiin form-box-style">
                         <div className="section-head">
-                            <h1 className="section-title">Dados Do utilizador <span>{token?token.access:''}</span></h1>
+                            <h1 className="section-title">{errortrans.editProfile[lang]} <span>{token?token.access:''}</span></h1>
                             {token&&token.access==="agency"?
                             <><p>Dados do parceiro</p><hr/></>:<></>}
                         </div>
@@ -128,7 +130,7 @@ function ProfileView(){
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="form-field-fiin">
-                                    <label htmlFor="first-name">Name</label>
+                                    <label htmlFor="first-name">{errortrans.fName[lang]}</label>
                                     <input type="text" name="firstname" id="first-name" 
                                     value={users&&users.cName} disabled={disableState}
                                     onChange={(e)=>setUsers(data => ({
@@ -139,7 +141,7 @@ function ProfileView(){
                             </div>
                             <div className="col-md-6">
                                 <div className="form-field-fiin">
-                                    <label htmlFor="last-name">Apelido</label>
+                                    <label htmlFor="last-name">{errortrans.sName[lang]}</label>
                                     <input type="text" name="lastname" id="last-name" 
                                     value={users&&users.sName} disabled={disableState}
                                     onChange={(e)=>setUsers(data => ({
@@ -150,7 +152,7 @@ function ProfileView(){
                             </div>
                             <div className="col-md-6">
                                 <div className="form-field-fiin">
-                                    <label htmlFor="nif">NIF</label>
+                                    <label htmlFor="nif">{errortrans.meliCode[lang]}</label>
                                     <input type="text" name="nif" id="nif" 
                                     value={users&&users.nif} disabled={disableState}
                                     onChange={(e)=>setUsers(data => ({
@@ -161,7 +163,7 @@ function ProfileView(){
                             </div>
                             <div className="col-md-6">
                                 <div className="form-field-fiin">
-                                    <label htmlFor="email">E-mail</label>
+                                    <label htmlFor="email">{errortrans.email[lang]}</label>
                                     <input type="email" name="email" id="email" 
                                     value={users&&users.email} disabled={disableState}
                                     onChange={(e)=>setUsers(data => ({
@@ -172,7 +174,7 @@ function ProfileView(){
                             </div>
                             <div className="col-md-6">
                                 <div className="form-field-fiin">
-                                    <label htmlFor="telefone">Telefone</label>
+                                    <label htmlFor="telefone">{errortrans.mobile[lang]}</label>
                                     <input type="tel" name="telefone" id="telefone" 
                                     value={users&&users.phone} disabled={disableState}
                                     onChange={(e)=>setUsers(data => ({
@@ -185,7 +187,7 @@ function ProfileView(){
                         <div className="footer-form-fiin">
                             <button type="submit" className={token.access==="manager"?"btn-fiin":"btn-fiin hidden"}
                             name="submit" onClick={saveData}
-                            >Save</button>
+                            >{errortrans.save[lang]}</button>
                         </div>
                         <small className="errorSmall" style={{color:error.color}}>
                             {error.message}</small>

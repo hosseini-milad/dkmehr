@@ -5,6 +5,7 @@ import env from "../../env"
 import Cookies from 'universal-cookie';
 import ClientListTable from "./ClientListTable"
 import FilterBitrix from "../filtersBitrix";
+import errortrans from "../../translate/error";
 const cookies = new Cookies();
 
 const ClientList = (props)=>{
@@ -13,8 +14,9 @@ const ClientList = (props)=>{
     const [error,setError] = useState({message:'',color:"brown"})
     const [doFilter,setDoFilter] = useState(1)
     const [pageNumber,setPageNumber] = useState(0)
-    
-    const token=cookies.get('fiin-login')
+    const lang = props.lang&&props.lang.lang
+    const direction=props.lang&&props.lang.dir
+    const token=cookies.get(env.cookieName)
     useEffect(()=>{
         setUsers('')
         const postOptions={
@@ -70,26 +72,26 @@ const ClientList = (props)=>{
             window.scrollTo(0,500)
     },[pageNumber,doFilter])
     return(
-        <div className="container">
-        <Breadcrumb title={"Lista de Clientes"}/>
+        <div className={`container ${direction}`}>
+        <Breadcrumb title={errortrans.clientList[lang]}/>
 
         <div className="section-fiin">
             {/*<ListFilters setDoFilter={setDoFilter} filter={filter} setFilter={setFilter}/>    */}
-            <FilterBitrix  setDoFilter={setDoFilter} filter={filter} setFilter={setFilter}/> 
+            <FilterBitrix  setDoFilter={setDoFilter} filter={filter} setFilter={setFilter} lang={lang}/> 
         </div>
         {!error.message?<div className="section-fiin">
             <div className="section-head">
-                <h1 className="section-title">Lista de Clientes</h1>
+                <h1 className="section-title">{errortrans.clientList[lang]}</h1>
                 <p className="hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt .</p>
             </div>   
             <div className="table-fiin">
                 <ClientListTable users={users} pageNumber={pageNumber} access={token&&token.level}
-                    setPageNumber={setPageNumber} setDoFilter={setDoFilter}/>
+                    setPageNumber={setPageNumber} setDoFilter={setDoFilter} lang={lang}/>
             </div>
             <div className="footer-form-fiin rev">
                 <button type="input" className="btn-fiin"
                 onClick={()=>{window.location.href="/client/register"}}>
-                    Registo de cliente</button>
+                    {errortrans.clientRegister[lang]}</button>
             </div>
         </div>:
         <small className="errorSmall" style={{color:error.color}}>

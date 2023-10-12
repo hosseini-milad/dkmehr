@@ -6,7 +6,8 @@ const env={
     //siteApiUrl:'http://localhost:4090',
     //siteApiUrl:'https://fiinadmin.deleves.com',
     siteApiUrl:'https://crmadmin.dkmehr.com',
-
+    cookieName:'crm-login',
+    cookieLang:'crm-lang',
     columnOrder:['lead','informations','fiin','property','seguros',
         'escritura','commissions','suspended']
 }

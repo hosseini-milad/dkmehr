@@ -1,5 +1,5 @@
 const errortrans ={
-    defaultLang:"portuguese",
+    defaultLang:"english",
     defaultDir:"ltr",
     //Login Page
     signBtn:{
@@ -58,6 +58,66 @@ const errortrans ={
         english: "Client list",
         portuguese: "Lista de Clientes",
         persian: "لیست مشتریان"
+    },
+
+
+    //Profile
+    editProfile:{
+        english: "Edit Profile",
+        portuguese: "Dados do utilizador",
+        persian: "ویرایش حساب کاربری"
+    },
+    password:{
+        english: "Password",
+        portuguese: "Password",
+        persian: "رمز عبور"
+    },
+    logOut:{
+        english: "Log Out",
+        portuguese: "Sair da Sessão",
+        persian: "خروج"
+    },
+    fName:{
+        english: "Name",
+        portuguese: "Nome",
+        persian: "نام"
+    },
+    sName:{
+        english: "Sir Name",
+        portuguese: "Apelido",
+        persian: "نام خانوادگی"
+    },
+    meliCode:{
+        english: "Meli Code",
+        portuguese: "NIF",
+        persian: "کدملی"
+    },
+    email:{
+        english: "E-Mail",
+        portuguese: "e-mail",
+        persian: "ایمیل"
+    },
+    mobile:{
+        english: "Mobile",
+        portuguese: "Telefone",
+        persian: "شماره موبایل"
+    },
+    save:{
+        english: "Save",
+        portuguese: "Save",
+        persian: "ذخیره"
+    },
+    register:{
+        english: "Register",
+        portuguese: "Registar",
+        persian: "ثبت"
+    },
+
+    //Table List
+    filter:{
+        english: "Filter",
+        portuguese: "Filtros",
+        persian: "فیلتر"
     },
 }
 export default errortrans

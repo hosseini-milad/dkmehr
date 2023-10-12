@@ -2,6 +2,7 @@ import { useState } from "react"
 import env from "../env"
 import WaitingBtn from "../components/Button/waitingBtn";
 import Cookies from 'universal-cookie';
+import errortrans from "../translate/error";
 const cookies = new Cookies();
 
 function Register(props){
@@ -9,9 +10,10 @@ function Register(props){
     const [regElement,setRegElement] = useState('')
     const [error,setError] = useState({message:'',color:"brown"})
     
+    const lang = props.lang&&props.lang
     const [showPass,setShowPass] = useState(0)
     const RegisterNow=()=>{
-        const token=cookies.get('fiin-login')
+        const token=cookies.get(env.cookieName)
         const postOptions={
             method:'post',
             headers: { 'Content-Type': 'application/json' ,
@@ -43,14 +45,15 @@ function Register(props){
     return(
         <div className="form-fiin form-box-style">
             <div className="section-head">
-                <h1 className="section-title">Registo de {props.title}</h1>
+                <h1 className="section-title">{errortrans.clientRegister[lang]}</h1>
                 <p className="hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt .</p>
             </div>
             <div className="row">
                 <div className="col-md-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="first-name">Nome<sup>*</sup></label>
-                        <input type="text" name="firstname" id="first-name" placeholder="Nome" required
+                        <label htmlFor="first-name">{errortrans.fName[lang]}<sup>*</sup></label>
+                        <input type="text" name="firstname" id="first-name" 
+                            placeholder={errortrans.fName[lang]} required
                         onChange={(e)=>setRegElement(data => ({
                             ...data,
                             ...{cName:e.target.value}
@@ -59,8 +62,9 @@ function Register(props){
                 </div>
                 <div className="col-md-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="last-name">Apelido<sup>*</sup></label>
-                        <input type="text" name="lastname" id="last-name" placeholder="Apelido" required
+                        <label htmlFor="last-name">{errortrans.sName[lang]}<sup>*</sup></label>
+                        <input type="text" name="lastname" id="last-name" 
+                            placeholder={errortrans.sName[lang]} required
                         onChange={(e)=>setRegElement(data => ({
                             ...data,
                             ...{sName:e.target.value}
@@ -69,8 +73,9 @@ function Register(props){
                 </div>
                 <div className="col-md-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="telefone">Telefone<sup>*</sup></label>
-                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required
+                        <label htmlFor="telefone">{errortrans.mobile[lang]}<sup>*</sup></label>
+                        <input type="tel" name="telefone" id="telefone" 
+                        placeholder={errortrans.mobile[lang]} required
                         onChange={(e)=>setRegElement(data => ({
                             ...data,
                             ...{phone:e.target.value}
@@ -79,8 +84,9 @@ function Register(props){
                 </div>
                 <div className="col-md-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="email">E-mail</label>
-                        <input type="email" name="email" id="email" placeholder="E-mail"
+                        <label htmlFor="email">{errortrans.email[lang]}</label>
+                        <input type="email" name="email" id="email" 
+                        placeholder={errortrans.email[lang]}
                         onChange={(e)=>setRegElement(data => ({
                             ...data,
                             ...{email:e.target.value}
@@ -89,8 +95,9 @@ function Register(props){
                 </div>
                 <div className="col-md-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="nif">NIF</label>
-                        <input type="text" name="nif" id="nif" placeholder="NIF"
+                        <label htmlFor="nif">{errortrans.meliCode[lang]}</label>
+                        <input type="text" name="nif" id="nif" 
+                            placeholder={errortrans.meliCode[lang]}
                         onChange={(e)=>setRegElement(data => ({
                             ...data,
                             ...{nif:e.target.value}
@@ -99,9 +106,9 @@ function Register(props){
                 </div>
                 {props.showpass?<div className="col-md-6">
                     <div className="form-field-fiin">
-                        <label htmlFor="password">Password​<sup>*</sup></label>
+                        <label htmlFor="password">{errortrans.password[lang]}<sup>*</sup></label>
                         <input type={showPass?"input":"password"} name="password" 
-                            id="password" placeholder="Password" required
+                            id="password" placeholder={errortrans.password[lang]} required
                         onChange={(e)=>setRegElement(data => ({
                             ...data,
                             ...{password:e.target.value}
@@ -112,8 +119,8 @@ function Register(props){
                 </div>:<></>}
             </div>
             <div className="footer-form-fiin">
-                <WaitingBtn class="btn-fiin" title="Registar" 
-                    waiting={'Registering.'}
+                <WaitingBtn class="btn-fiin" title={errortrans.register[lang]} 
+                    waiting={errortrans.register[lang]}
                     function={RegisterNow} name="submit" error={error}/> 
             </div>
             <small className="errorSmall" style={{color:error.color}}>

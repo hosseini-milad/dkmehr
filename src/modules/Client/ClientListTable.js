@@ -1,18 +1,19 @@
 import { useState } from "react"
 import Paging from "../../components/Paging"
+import errortrans from "../../translate/error"
 
 function ClientListTable(props){
     const usersList = props.users&&props.users.user
-    //console.log(props.access)
+    const lang = props.lang&&props.lang
     return(<>
         <table>
             <thead>
                 <tr>
-                    <th width="7.5%">Nome</th>
-                    <th width="7.5%">Apelido</th>
-                    <th width="10%">NIF</th>
-                    <th width="10%">E-mail</th>
-                    <th width="10%">Telefone</th>
+                    <th width="7.5%">{errortrans.fName[lang]}</th>
+                    <th width="7.5%">{errortrans.sName[lang]}</th>
+                    <th width="10%">{errortrans.meliCode[lang]}</th>
+                    <th width="10%">{errortrans.email[lang]}</th>
+                    <th width="10%">{errortrans.mobile[lang]}</th>
                     {props.access>4?<><th width="7.5%">Nome (Cons)</th>
                     <th width="7.5%">Apelido (Cons)</th>
                     <th width="10%">NIF (Cons)</th></>:<></>}

@@ -36,25 +36,26 @@ import ProfileView from './pages/ProfileView';
 import ActiveUser from './pages/ActiveUser';
 import ClientDetail from './modules/Client/ClientDetail';
 import Steps from './modules/StepsFill/Steps';
+import env from './env';
 const cookies = new Cookies();
-var lang = JSON.parse(localStorage.getItem('fiin-lang'));
+var lang = JSON.parse(localStorage.getItem(env.cookieLang));
 
 if(!lang){
-  localStorage.setItem('fiin-lang',JSON.stringify(
+  localStorage.setItem(env.cookieLang,JSON.stringify(
     {lang:errortrans.defaultLang}));
-  lang = JSON.parse(localStorage.getItem('fiin-lang'));
+  lang = JSON.parse(localStorage.getItem(env.cookieLang));
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Router>
-    {cookies.get('fiin-login')?
+    {cookies.get(env.cookieName)?
       <Routes>
         <Route path="/" element={<Layout><Dashboard/></Layout>}/>
         <Route path="/dashboard" element={<Layout><Dashboard/></Layout>}/>
         <Route path="/password" element={<Layout><Password/></Layout>}/>
         <Route path="/upload" element={<Layout><UpLoad/></Layout>}/>
-        <Route path="/profile" element={<Layout><ProfileView/></Layout>}/>
+        <Route path="/profile" element={<Layout><ProfileView lang={lang}/></Layout>}/>
         <Route path="/profile/:profileId" element={<Layout><Profile/></Layout>}/>
         
         
@@ -72,8 +73,8 @@ root.render(
         <Route path="/consultant/list" element={<Layout><ConsultantList/></Layout>}/>
 
         {/* Client Pages */}
-        <Route path="/client/list" element={<Layout><ClientList/></Layout>}/>
-        <Route path="/client/register" element={<Layout><RegClient/></Layout>}/>
+        <Route path="/client/list" element={<Layout><ClientList lang={lang}/></Layout>}/>
+        <Route path="/client/register" element={<Layout><RegClient lang={lang}/></Layout>}/>
         
         {/* Form Pages */}
         <Route path="/client/steps" element={<Layout><Steps/></Layout>}/>

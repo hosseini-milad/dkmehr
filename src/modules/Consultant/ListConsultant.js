@@ -11,7 +11,7 @@ const ConsultantList = (props)=>{
     const [filter,setFilter] = useState()
     const [doFilter,setDoFilter] = useState(1)
     const [pageNumber,setPageNumber] = useState(0)
-    const token=cookies.get('fiin-login')
+    const token=cookies.get(env.cookieName)
     useEffect(()=>{
         if(!doFilter)return
         const postOptions={
